@@ -1,45 +1,85 @@
 ﻿using System;
+using static System.Int16;
 
 namespace OS_Practice4
 {
     internal static class Program
     {
-        private static int Enter(string message)
+        private static long Enter(string message)
         {
             while (true)
             {
                 Console.WriteLine($"Введите {message}");
                 string input = Console.ReadLine();
-                if (int.TryParse(input, out int _))
-                {
-                    return Convert.ToInt32(input);
-                }
+                if (long.TryParse(input, out long enter)) return enter;
             }
         }
 
-        private static int F(int arg, int b, int c)
+        private static long F(short i, short b, short c)
         {
-            if (arg == 0) return 0;
+            if (i == 0) return 0;
 
-            int a = 0;
-            for (int i = 1; i < 100000000; i++)
-            {
-                a += 2 * b + c - arg;
-            }
+            long a = 0;
+            for (int index = 0; index < 100000000; index++) a += 2 * b + c - i;
 
-            return F(arg - 1, b, c) + a;
+            return F(i - 1, b, c) + a;
+        }
+
+        private static long F(int i, int b, int c)
+        {
+            if (i == 0) return 0;
+
+            long a = 0;
+            for (int index = 0; index < 100000000; index++) a += 2 * b + c - i;
+
+            return F(i - 1, b, c) + a;
+        }
+
+        private static long F(long i, long b, long c)
+        {
+            if (i == 0) return 0;
+
+            long a = 0;
+            for (int index = 0; index < 100000000; index++) a += 2 * b + c - i;
+
+            return F(i - 1, b, c) + a;
         }
 
         private static void Main()
         {
-            int arg = Enter("Введите i");
-            int b = Enter("Введите b");
-            int c = Enter("Введите c");
+            DateTime start;
+            long result;
+            long i = Enter("Введите i");
+            long b = Enter("Введите b");
+            long c = Enter("Введите c");
             Console.WriteLine("Считаем...");
-            DateTime start = DateTime.Now;
-            int result = F(arg, b, c);
+
+            if (MinValue <= i && i <= MaxValue &&
+                MinValue <= b && b <= MaxValue &&
+                MinValue <= c && c <= MaxValue)
+            {
+                start = DateTime.Now;
+                result = F((short) i, (short) b, (short) c);
+                Console.WriteLine($"Время: {DateTime.Now - start}");
+                Console.WriteLine($"Ответ: {result}");
+                return;
+            }
+
+            if (MinValue > i && i <= int.MinValue || i > MaxValue && i <= int.MaxValue &&
+                MinValue > b && b <= int.MinValue || b > MaxValue && b <= int.MaxValue &&
+                MinValue > c && c <= int.MinValue || c > MaxValue && c <= int.MaxValue)
+            {
+                start = DateTime.Now;
+                result = F((int) i, (int) b, (int) c);
+                Console.WriteLine($"Время: {DateTime.Now - start}");
+                Console.WriteLine($"Ответ2: {result}");
+                return;
+            }
+
+            start = DateTime.Now;
+            result = F(i, b, c);
             Console.WriteLine($"Время: {DateTime.Now - start}");
-            Console.WriteLine($"Ответ: {result}");
+            Console.WriteLine($"Ответ3: {result}");
         }
     }
 }
