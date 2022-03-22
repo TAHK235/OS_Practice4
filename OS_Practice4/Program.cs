@@ -72,14 +72,14 @@ namespace OS_Practice4
                 start = DateTime.Now;
                 result = F((int) i, (int) b, (int) c);
                 Console.WriteLine($"Время: {DateTime.Now - start}");
-                Console.WriteLine($"Ответ2: {result}");
+                Console.WriteLine($"Ответ: {result}");
                 return;
             }
 
             start = DateTime.Now;
             result = F(i, b, c);
             Console.WriteLine($"Время: {DateTime.Now - start}");
-            Console.WriteLine($"Ответ3: {result}");
+            Console.WriteLine($"Ответ: {result}");
         }
     }
 }
